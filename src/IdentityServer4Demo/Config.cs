@@ -142,6 +142,18 @@ namespace IdentityServer4Demo
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowedScopes = { "openid", "profile", "email", "api" },
                 },
+
+                new Client
+                {
+                    ClientId = "resourceowner",
+                    ClientName = "Resource Owner Client",
+
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = { "https://notused" },
+                    PostLogoutRedirectUris = { "https://notused" },
+                    AllowedScopes = { "openid", "profile", "email", "api", },
+                }
             };
         }
     }

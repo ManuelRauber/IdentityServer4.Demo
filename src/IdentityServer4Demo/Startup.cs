@@ -34,15 +34,7 @@ namespace IdentityServer4Demo
 
             services.AddTransient<IRedirectUriValidator, DemoRedirectValidator>();
             services.AddTransient<ICorsPolicyService, DemoCorsPolicy>();
-
-            if (_env.IsDevelopment())
-            {
-                builder.AddTemporarySigningCredential();
-            }
-            else
-            {
-                builder.AddSigningCredential("98D3ACF057299C3745044BE918986AD7ED0AD4A2", StoreLocation.CurrentUser, nameType: NameType.Thumbprint);
-            }
+            builder.AddTemporarySigningCredential();
         }
 
         public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
@@ -56,37 +48,7 @@ namespace IdentityServer4Demo
             loggerFactory.AddSerilog(serilog);
             app.UseDeveloperExceptionPage();
 
-            app.Map("/api", apiApp =>
-            {
-                apiApp.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-                {
-                    Authority = "https://demo.identityserver.io",
-
-                    ApiName = "api"
-                });
-
-                apiApp.UseMvc();
-            });
-
             app.UseIdentityServer();
-
-            // cookie middleware for temporarily storing the outcome of the external authentication
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
-                AutomaticAuthenticate = false,
-                AutomaticChallenge = false
-            });
-
-            // middleware for google authentication
-            app.UseGoogleAuthentication(new GoogleOptions
-            {
-                AuthenticationScheme = "Google",
-                SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
-                ClientId = "708996912208-9m4dkjb5hscn7cjrn5u0r4tbgkbj1fko.apps.googleusercontent.com",
-                ClientSecret = "wdfPY6t8H8cecgjlxud__4Gh"
-            });
-
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
