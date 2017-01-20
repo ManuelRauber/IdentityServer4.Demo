@@ -158,6 +158,8 @@ namespace IdentityServer4Demo
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
                         "api",
                         IdentityServerConstants.StandardScopes.OfflineAccess
                     },
