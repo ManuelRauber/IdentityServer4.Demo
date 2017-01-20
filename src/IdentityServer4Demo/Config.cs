@@ -162,7 +162,7 @@ namespace IdentityServer4Demo
                         IdentityServerConstants.StandardScopes.Email,
                         "api"
                     },
-                    AccessTokenLifetime = (int)TimeSpan.FromMinutes(5).TotalSeconds,
+                    AccessTokenLifetime = (int)TimeSpan.FromHours(2).TotalSeconds,
                     AccessTokenType = AccessTokenType.Reference
                 }
             };
