@@ -162,7 +162,8 @@ namespace IdentityServer4Demo
                         IdentityServerConstants.StandardScopes.OfflineAccess
                     },
                     AccessTokenLifetime = (int)TimeSpan.FromMinutes(5).TotalSeconds,
-                    AccessTokenType = AccessTokenType.Reference
+                    AccessTokenType = AccessTokenType.Reference,
+                    AllowOfflineAccess = true
                 }
             };
         }
