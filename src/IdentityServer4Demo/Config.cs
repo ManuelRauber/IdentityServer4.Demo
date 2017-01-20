@@ -154,7 +154,7 @@ namespace IdentityServer4Demo
                     RedirectUris = { "https://notused" },
                     PostLogoutRedirectUris = { "https://notused" },
                     ClientSecrets = { new Secret("secret".Sha256()) },
-                    AllowedScopes = { "openid", "profile", "email", "api", },
+                    AllowedScopes = { "openid", "profile", "email", "api", "offline_access" },
                     AccessTokenLifetime = (int)TimeSpan.FromMinutes(5).TotalSeconds,
                     AccessTokenType = AccessTokenType.Reference
                 }
