@@ -160,12 +160,10 @@ namespace IdentityServer4Demo
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "api",
-                        IdentityServerConstants.StandardScopes.OfflineAccess
+                        "api"
                     },
                     AccessTokenLifetime = (int)TimeSpan.FromMinutes(5).TotalSeconds,
-                    AccessTokenType = AccessTokenType.Reference,
-                    AllowOfflineAccess = true
+                    AccessTokenType = AccessTokenType.Reference
                 }
             };
         }
