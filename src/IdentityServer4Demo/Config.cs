@@ -1,6 +1,7 @@
 ﻿using System;
 using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityServer4;
 
 namespace IdentityServer4Demo
 {
@@ -154,7 +155,12 @@ namespace IdentityServer4Demo
                     RedirectUris = { "https://notused" },
                     PostLogoutRedirectUris = { "https://notused" },
                     ClientSecrets = { new Secret("secret".Sha256()) },
-                    AllowedScopes = { "openid", "profile", "email", "api", "offline_access" },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        "api",
+                        IdentityServerConstants.StandardScopes.OfflineAccess
+                    },
                     AccessTokenLifetime = (int)TimeSpan.FromMinutes(5).TotalSeconds,
                     AccessTokenType = AccessTokenType.Reference
                 }
