@@ -152,6 +152,7 @@ namespace IdentityServer4Demo
                     AllowAccessTokensViaBrowser = true,
                     RedirectUris = { "https://notused" },
                     PostLogoutRedirectUris = { "https://notused" },
+                    ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedScopes = { "openid", "profile", "email", "api", },
                 }
             };
