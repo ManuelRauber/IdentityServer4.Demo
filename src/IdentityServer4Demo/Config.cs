@@ -24,16 +24,9 @@ namespace IdentityServer4Demo
             {
                 new ApiResource("api", "Demo API")
                 {
-                    Scopes = new List<Scope>()
+                    UserClaims = new List<string>
                     {
-                        new Scope
-                        {
-                            Name = "picture",
-                            UserClaims = new List<string>
-                            {
-                                JwtClaimTypes.Picture
-                            }
-                        }
+                        JwtClaimTypes.Picture
                     }
                 }
             };
@@ -174,8 +167,7 @@ namespace IdentityServer4Demo
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "api",
-                        "picture"
+                        "api"
                     },
                     AccessTokenLifetime = (int)TimeSpan.FromHours(2).TotalSeconds,
                     AccessTokenType = AccessTokenType.Reference
