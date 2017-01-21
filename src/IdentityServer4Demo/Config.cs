@@ -1,7 +1,8 @@
 ﻿using System;
-using IdentityServer4.Models;
 using System.Collections.Generic;
+using IdentityModel;
 using IdentityServer4;
+using IdentityServer4.Models;
 
 namespace IdentityServer4Demo
 {
@@ -13,7 +14,7 @@ namespace IdentityServer4Demo
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                new IdentityResources.Email(),
+                new IdentityResources.Email()
             };
         }
 
@@ -22,6 +23,19 @@ namespace IdentityServer4Demo
             return new List<ApiResource>
             {
                 new ApiResource("api", "Demo API")
+                {
+                    Scopes = new List<Scope>()
+                    {
+                        new Scope
+                        {
+                            Name = "picture",
+                            UserClaims = new List<string>
+                            {
+                                JwtClaimTypes.Picture
+                            }
+                        }
+                    }
+                }
             };
         }
 
@@ -96,7 +110,7 @@ namespace IdentityServer4Demo
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "api" },
+                    AllowedScopes = { "api" }
                 },
 
                 // implicit (e.g. SPA or OIDC authentication)
@@ -110,7 +124,7 @@ namespace IdentityServer4Demo
                     PostLogoutRedirectUris = { "https://notused" },
 
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowedScopes = { "openid", "profile", "email", "api" },
+                    AllowedScopes = { "openid", "profile", "email", "api" }
                 },
 
                 // implicit using reference tokens (e.g. SPA or OIDC authentication)
@@ -126,7 +140,7 @@ namespace IdentityServer4Demo
                     PostLogoutRedirectUris = { "https://notused" },
 
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowedScopes = { "openid", "profile", "email", "api" },
+                    AllowedScopes = { "openid", "profile", "email", "api" }
                 },
 
                 // implicit using reference tokens (e.g. SPA or OIDC authentication)
@@ -142,7 +156,7 @@ namespace IdentityServer4Demo
                     PostLogoutRedirectUris = { "https://notused" },
 
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowedScopes = { "openid", "profile", "email", "api" },
+                    AllowedScopes = { "openid", "profile", "email", "api" }
                 },
 
                 new Client
@@ -160,7 +174,8 @@ namespace IdentityServer4Demo
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "api"
+                        "api",
+                        "picture"
                     },
                     AccessTokenLifetime = (int)TimeSpan.FromHours(2).TotalSeconds,
                     AccessTokenType = AccessTokenType.Reference
