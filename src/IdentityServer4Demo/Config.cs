@@ -171,6 +171,25 @@ namespace IdentityServer4Demo
                     },
                     AccessTokenLifetime = (int)TimeSpan.FromHours(2).TotalSeconds,
                     AccessTokenType = AccessTokenType.Reference
+                },
+                new Client
+                {
+                    ClientId = "resourceownerjwt",
+                    ClientName = "Resource Owner Client with JWT",
+
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = { "https://notused" },
+                    PostLogoutRedirectUris = { "https://notused" },
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api"
+                    },
+                    AccessTokenLifetime = (int)TimeSpan.FromHours(2).TotalSeconds
                 }
             };
         }
